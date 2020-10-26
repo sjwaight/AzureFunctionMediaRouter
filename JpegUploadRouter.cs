@@ -15,7 +15,8 @@ namespace Siliconvalve.Demo
         public static string Run([BlobTrigger("sampleuploads/{name}.jpg", Connection = "customserverless01_STORAGE")]Stream blobContent, string blobName, ILogger log)
         {
             log.LogInformation($"Routing image file with URI: {blobName}");
-            return blobName;
+            // just return the filename.
+            return blobName.Split('/')[4];
         }
     }
 }
