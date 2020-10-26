@@ -12,11 +12,11 @@ namespace Siliconvalve.Demo
     {
         [FunctionName("JpegUploadRouter")]
         [return: Queue("images", Connection = "customserverless01_QUEUE")]
-        public static string Run([BlobTrigger("sampleuploads/{name}.jpg", Connection = "customserverless01_STORAGE")]Stream blobContent, string blobName, ILogger log)
+        public static string Run([BlobTrigger("sampleuploads/{name}.jpg", Connection = "customserverless01_STORAGE")]Stream blobContent, string name, ILogger log)
         {
-            log.LogInformation($"Routing image file with URI: {blobName}");
+            log.LogInformation($"Routing image file: {name}.jpg");
             // just return the filename.
-            return blobName.Split('/')[4];
+            return $"{name}.jpg";
         }
     }
 }
